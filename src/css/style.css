@@ -1,0 +1,139 @@
+@import "./_mixins.css";
+@import "./_dark.css";
+
+.wpalb-link {
+  display: grid;
+  grid-template: max-content auto / 5rem 1fr;
+  grid-template-areas:
+    "icon data"
+    "icon btn";
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+  padding: 1.25rem;
+  overflow: hidden;
+  line-height: 1.5;
+  text-decoration: none;
+  background-color: var(--su-bg-white, white);
+  border: 2px solid var(--su-border-extra-light, #e4e4e7); /* zinc-200 */
+  border-radius: var(--su-radius-xl, 0.625rem);
+
+  @media (--sm) {
+    grid-template: auto / 5rem 1fr max-content;
+    grid-template-areas: "icon data btn";
+    gap: 1.5rem;
+  }
+}
+
+.wpalb-music-video & .wpalb-link {
+  grid-template-columns: 6.25rem 1fr max-content;
+}
+
+.wpalb-icon {
+  display: grid;
+  grid-area: icon;
+  place-items: center;
+}
+
+.wpalb-img {
+  border-radius: var(--su-radius-img-sm, 0.25rem);
+}
+
+.wpalb-app & .wpalb-img {
+  border-radius: 24%;
+}
+
+.wpalb-data {
+  grid-area: data;
+}
+
+.wpalb-title {
+  display: block;
+  font-size: var(--su-font-size-sm, 0.875rem);
+  font-weight: 700;
+  line-height: 1.375;
+  color: var(--su-text-dark, #f4f4f5); /* zinc-100 */
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  @media (--sm) {
+    font-size: var(--su-font-size-base, 1rem);
+  }
+}
+
+.wpalb-artist {
+  margin-top: 0.25rem;
+  font-size: var(--su-font-size-xs, 0.75rem);
+
+  @media (--sm) {
+    font-size: var(--su-font-size-sm, 0.875rem);
+  }
+}
+
+.wpalb-btns {
+  display: flex;
+  grid-area: btn;
+  gap: 1rem;
+}
+
+.wpalb-btn {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.125rem;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  line-height: 1.5;
+  border-radius: 9999px;
+  transition: 0.2s;
+
+  &:hover {
+    text-decoration: none;
+    filter: brightness(120%);
+  }
+}
+
+.wpalb-btn-label {
+  font-size: var(--su-font-size-xs, 0.75rem);
+
+  @media (--sm) {
+    font-size: var(--su-font-size-sm, 0.875rem);
+  }
+}
+
+.wpalb-audition {
+  color: #3f3f46;
+  background-color: #f4f4f5;
+}
+
+.wpalb-store {
+  color: white !important;
+}
+
+:is(
+.wpalb-app,
+.wpalb-mac-app) .wpalb-store {
+  background-color: #3b82f6 !important; /* blue-500 */
+}
+
+.wpalb-movie .wpalb-store {
+  background-color: #18181b; /* zinc-900 */
+}
+
+:is(
+.wpalb-ebook,
+.wpalb-audiobook) .wpalb-store {
+  background-color: #f59e0b; /* amber-500 */
+}
+
+.wpalb-podcast .wpalb-store {
+  background-color: #8b5cf6; /* violet-500 */
+}
+
+:is(
+.wpalb-music-track,
+.wpalb-music-album,
+.wpalb-music-video) .wpalb-store {
+  background-color: #f43f5e; /* rose-500 */
+}
