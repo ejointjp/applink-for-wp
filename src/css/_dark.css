@@ -1,8 +1,0 @@
-.dark .wpalb-link {
-  background-color: #27272a; /* zinc-800 */
-  border-color: var(--su-border-extra-light, #3f3f46); /* zinc-700 */
-}
-
-.dark .wpalb-title {
-  color: var(--su-text-dark, #f4f4f5); /* zinc-100 */
-}

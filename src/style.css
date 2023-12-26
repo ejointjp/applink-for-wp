@@ -1,0 +1,91 @@
+.litoal {
+  container-type: inline-size;
+}
+
+.litoal-link {
+  display: flex;
+  gap: 1.5rem;
+  padding: var(--lito-spacing-box);
+  overflow: hidden;
+  text-decoration: none;
+  background-color: var(--lito-screen);
+  border: 2px solid var(--lito-light-gray);
+  border-radius: var(--lito-radius-md);
+  transition: background-color 0.2s;
+
+  &:has(a:hover) {
+    background-color: var(--lito-base-gray);
+  }
+}
+
+.litoal-img {
+  border-radius: var(--lito-radius-sm);
+  width: 5rem;
+}
+
+.litoal-app & .litoal-img {
+  border-radius: 24%;
+}
+
+.litoal-title {
+  display: block;
+  font-weight: 600;
+  color: var(--lito-dark-gray);
+  text-decoration: none;
+}
+
+.litoal-artist {
+  margin-top: 0.25rem;
+  font-size: var(--lito-font-size-xs);
+  color: var(--lito-gray);
+}
+
+.litoal-btns {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.litoal-btn {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.125rem;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  line-height: 1.5;
+  text-decoration: none;
+  border-radius: 999px;
+}
+
+.litoal-btn-label {
+  font-size: var(--lito-font-size-xs);
+}
+
+.litoal-audition {
+  color: #3f3f46;
+  background-color: #f4f4f5;
+}
+
+.litoal-store {
+  color: white !important;
+}
+
+:is(.litoal-app, .litoal-mac-app) .litoal-store {
+  background-color: #3b82f6 !important; /* blue-500 */
+}
+
+.litoal-movie .litoal-store {
+  background-color: #18181b; /* zinc-900 */
+}
+
+:is(.litoal-ebook, .litoal-audiobook) .litoal-store {
+  background-color: #f59e0b; /* amber-500 */
+}
+
+.litoal-podcast .litoal-store {
+  background-color: #8b5cf6; /* violet-500 */
+}
+
+:is(.litoal-music-track, .litoal-music-album, .litoal-music-video) .litoal-store {
+  background-color: #f43f5e; /* rose-500 */
+}

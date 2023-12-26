@@ -1,33 +1,20 @@
 module.exports = {
   env: {
     browser: true,
-    commonjs: true,
     es2021: true,
-    node: true
+    node: true,
   },
   extends: [
-    'standard',
-    'plugin:react/recommended'
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
   ],
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true
-    },
-    ecmaVersion: 12,
-    sourceType: 'module'
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
-  plugins: [
-    'react'
-  ],
   rules: {
-    'react/prop-types': 'off',
-    'react/react-in-jsx-scope': 'off',
-    'react/jsx-indent': [2, 2],
-    'react/jsx-no-target-blank': [2, {
-      allowReferrer: true
-    }]
+    "react/prop-types": "off", // ルールはお好みで
+    "no-unused-vars": "warn",
   },
-  globals: {
-    wp: 'readonly'
-  }
-}
+};
