@@ -52,22 +52,21 @@
   }
 }
 
-.wp-applink-figute {
-  width: 2.5rem;
-
+.wp-applink-figure {
   & > img {
     border-radius: 0.25rem;
+    width: 3rem;
   }
 }
 
-.litoal-music-video .wp-appink-icon {
-  width: 4rem;
+.wp-applink-music-video .wp-appink-figure {
+}
 
-  & > img {
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    object-position: center center;
-  }
+.wp-applink-music-video .wp-applink-img {
+  width: 4rem;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .wp-applink-img {

@@ -117,7 +117,7 @@ const edit = (props) => {
             setAttributes({ app: app });
           }}
         >
-          <div className="wp-applink-figute">
+          <div className="wp-applink-figure">
             <img className="wp-applink-img" src={app.iconUrl} />
           </div>
           <div className="wp-applink-content">
@@ -125,7 +125,7 @@ const edit = (props) => {
             <div className="wp-applink-artist">{app.artist}</div>
           </div>
           <button
-            className="button"
+            className="components-button is-secondary"
             onClick={() => {
               setAttributes({ app: app });
             }}

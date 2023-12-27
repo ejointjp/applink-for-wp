@@ -23,6 +23,10 @@
   width: 5rem;
 }
 
+.litoal-music-video .litoal-img {
+  width: 6.5rem;
+}
+
 .litoal-app & .litoal-img {
   border-radius: 24%;
 }
