@@ -33,7 +33,7 @@ define(
 	array(
 		array(
 			'value' => 'auto',
-			'label' => '自動（選択したストアに応じて）',
+			'label' => '自動',
 		),
 		array(
 			'value' => 'en_us',
