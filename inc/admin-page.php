@@ -1,7 +1,5 @@
 <?php
 
-require_once plugin_dir_path( __FILE__ ) . 'define.php';
-
 // 管理画面に設定画面を追加
 function litoal_add_admin_page() {
 	add_options_page(
@@ -22,8 +20,8 @@ function litoal_options_page_html() {
 
 	<?php
 	global $parent_file;
-	if ( $parent_file != 'options-general.php' ) {
-		require ABSPATH . 'wp-admin/options-head.php';
+	if ( 'options-general.php' !== $parent_file ) {
+		require_once ABSPATH . 'wp-admin/options-head.php';
 	}
 	?>
 
