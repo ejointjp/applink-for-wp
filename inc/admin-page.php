@@ -45,9 +45,6 @@ function litoal_sanitize_options( $input ) {
 		$sanitized['token'] = sanitize_text_field( $input['token'] );
 	}
 
-	// nocssのサニタイズ（1 または 空）
-	$sanitized['nocss'] = isset( $input['nocss'] ) ? 1 : 0;
-
 	// limitのサニタイズ（許可された値のみ）
 	$allowed_limits = array( 10, 25, 50, 100, 200 );
 	if ( isset( $input['limit'] ) && in_array( (int) $input['limit'], $allowed_limits, true ) ) {
@@ -87,7 +84,6 @@ function litoal_page_init() {
 	add_settings_section( 'litoal-setting-section-id', '', '', 'litoal-setting' );
 
 	add_settings_field( 'token', 'PHGトークン', 'litoal_token_callback', 'litoal-setting', 'litoal-setting-section-id' );
-	add_settings_field( 'nocss', 'プラグインのCSSを使わない', 'litoal_nocss_callback', 'litoal-setting', 'litoal-setting-section-id' );
 	add_settings_field( 'limit', 'デフォルトの検索結果数', 'litoal_limit_callback', 'litoal-setting', 'litoal-setting-section-id' );
 	add_settings_field( 'country', 'デフォルトの検索対象ストア', 'litoal_country_callback', 'litoal-setting', 'litoal-setting-section-id' );
 	add_settings_field( 'lang', 'デフォルトの表示言語', 'litoal_lang_callback', 'litoal-setting', 'litoal-setting-section-id' );
@@ -99,13 +95,6 @@ function litoal_token_callback() {
 	$options = get_option( 'litoal-setting' );
 	$token   = isset( $options['token'] ) ? $options['token'] : '';
 	printf( '<input type="text" name="litoal-setting[token]" size="30" value="%s">', esc_attr( $token ) );
-}
-
-// CSSの設定セクション
-function litoal_nocss_callback() {
-	$options = get_option( 'litoal-setting' );
-	$checked = isset( $options['nocss'] ) ? checked( $options['nocss'], 1, false ) : '';
-	printf( '<input type="checkbox" id="nocss" name="litoal-setting[nocss]" value="1" %s>', $checked );
 }
 
 // 検索結果数の設定セクション
@@ -124,23 +113,25 @@ function litoal_limit_callback() {
 // 国の設定セクション
 function litoal_country_callback() {
 	$options    = get_option( 'litoal-setting' );
-	$option_val = isset( $options['country'] ) ? $options['country'] : '';
+	$option_val = isset( $options['country'] ) ? $options['country'] : 'JP';
 
 	echo '<select name="litoal-setting[country]">';
 	foreach ( LITOAL_COUNTRY_VALUES as $item ) {
 		printf( '<option value="%s" %s>%s</option>', $item['value'], selected( $option_val, $item['value'], false ), $item['label'] );
 	}
 	echo '</select>';
+	echo '<p class="description">検索するApp Storeの国を選択します。</p>';
 }
 
 // 言語の設定セクション
 function litoal_lang_callback() {
 	$options    = get_option( 'litoal-setting' );
-	$option_val = isset( $options['lang'] ) ? $options['lang'] : '';
+	$option_val = isset( $options['lang'] ) ? $options['lang'] : 'auto';
 
 	echo '<select name="litoal-setting[lang]">';
 	foreach ( LITOAL_LANG_VALUES as $item ) {
 		printf( '<option value="%s" %s>%s</option>', $item['value'], selected( $option_val, $item['value'], false ), $item['label'] );
 	}
 	echo '</select>';
+	echo '<p class="description">Applinkの表示言語を選択します。</p>';
 }
