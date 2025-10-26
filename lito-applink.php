@@ -69,6 +69,7 @@ register_activation_hook( __FILE__, 'litoal_register_activation' );
 function litoal_admin_enqueue_scripts() {
 	/**
 	 * PHPで生成した値をJavaScriptに渡す
+	 * 定数はPHP側で一元管理し、JavaScriptに渡す
 	 *
 	 * 第1引数: 渡したいJavaScriptの名前（wp_enqueue_scriptの第1引数に書いたもの）
 	 * 第2引数: JavaScript内でのオブジェクト名
@@ -78,9 +79,6 @@ function litoal_admin_enqueue_scripts() {
 		'lito-applink-editor-script',
 		'litoalAjaxValues',
 		array(
-			'api'            => admin_url( 'admin-ajax.php' ),
-			'action'         => 'litoal-action',
-			'nonce'          => wp_create_nonce( 'litoal-ajax' ),
 			'optionsPageUrl' => admin_url( 'options-general.php?page=litoal-setting' ),
 			'options'        => get_option( 'litoal-setting' ),
 			'limitValues'    => LITOAL_LIMIT_VALUES,
@@ -90,52 +88,3 @@ function litoal_admin_enqueue_scripts() {
 	);
 }
 add_action( 'admin_enqueue_scripts', 'litoal_admin_enqueue_scripts' );
-
-
-// Ajaxで返す値
-function litoal_ajax() {
-	// nonceの取得とサニタイズ
-	$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
-
-	if ( ! wp_verify_nonce( $nonce, 'litoal-ajax' ) ) {
-		wp_send_json_error( array( 'message' => 'Invalid nonce' ) );
-		die();
-	}
-
-	// URLの取得とサニタイズ
-	$url = isset( $_POST['url'] ) ? esc_url_raw( wp_unslash( $_POST['url'] ) ) : '';
-
-	// URLの検証
-	$parsed_url = parse_url( $url );
-
-	// プロトコルがhttpsであることを確認
-	if ( ! isset( $parsed_url['scheme'] ) || 'https' !== $parsed_url['scheme'] ) {
-		wp_send_json_error( array( 'message' => 'Invalid protocol' ) );
-		die();
-	}
-
-	// ホスト名がitunes.apple.comであることを確認
-	if ( ! isset( $parsed_url['host'] ) || 'itunes.apple.com' !== $parsed_url['host'] ) {
-		wp_send_json_error( array( 'message' => 'Invalid host' ) );
-		die();
-	}
-
-	// URLの取得
-	$response = wp_remote_get(
-		$url,
-		array(
-			'timeout' => 15,
-		)
-	);
-
-	// エラーハンドリング
-	if ( is_wp_error( $response ) ) {
-		wp_send_json_error( array( 'message' => $response->get_error_message() ) );
-		die();
-	}
-
-	$body = wp_remote_retrieve_body( $response );
-	echo $body;
-	die();
-}
-add_action( 'wp_ajax_litoal-action', 'litoal_ajax' );

@@ -23,17 +23,9 @@ import {
 
 // PHPから取得した変数
 // eslint-disable-next-line no-undef
-const {
-	api,
-	action,
-	nonce,
-	options,
-	optionsPageUrl,
-	limitValues,
-	countryValues,
-	langValues,
+const { options, optionsPageUrl, limitValues, countryValues, langValues } =
 	// eslint-disable-next-line no-undef
-} = litoalAjaxValues;
+	litoalAjaxValues;
 
 const edit = (props) => {
 	const blockProps = useBlockProps({ className: 'wp-applink-wrapper' });
@@ -58,15 +50,12 @@ const edit = (props) => {
 		searchParams.append('at', options.token || '11l64V');
 
 		const url = 'https://itunes.apple.com/search?' + searchParams.toString();
-		const params = new URLSearchParams();
-		params.append('action', action);
-		params.append('nonce', nonce);
-		params.append('url', url);
 
 		setAttributes({ app: {} });
 
 		try {
-			const res = await fetch(api, { method: 'post', body: params });
+			// iTunes Search APIを直接呼び出し
+			const res = await fetch(url);
 			const result = await res.json();
 			await setResult(result);
 			setState('result-success');
@@ -74,18 +63,7 @@ const edit = (props) => {
 			setState('result-error');
 			console.error(e);
 		}
-	}, [
-		lang,
-		country,
-		entity,
-		term,
-		limit,
-		options.token,
-		api,
-		action,
-		nonce,
-		setAttributes,
-	]);
+	}, [lang, country, entity, term, limit, options.token, setAttributes]);
 
 	// Termが変更されている場合はTermを更新
 	const setTermIfChanged = () => {
