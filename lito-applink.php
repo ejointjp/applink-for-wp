@@ -103,12 +103,16 @@ add_action( 'admin_enqueue_scripts', 'litoal_admin_enqueue_scripts' );
 
 // Ajaxで返す値
 function litoal_ajax() {
-	if ( ! wp_verify_nonce( $_POST['nonce'], 'litoal-ajax' ) ) {
+	// nonceの取得とサニタイズ
+	$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
+
+	if ( ! wp_verify_nonce( $nonce, 'litoal-ajax' ) ) {
 		wp_send_json_error( array( 'message' => 'Invalid nonce' ) );
 		die();
 	}
 
-	$url = isset( $_POST['url'] ) ? $_POST['url'] : '';
+	// URLの取得とサニタイズ
+	$url = isset( $_POST['url'] ) ? esc_url_raw( wp_unslash( $_POST['url'] ) ) : '';
 
 	// URLの検証
 	$parsed_url = parse_url( $url );
