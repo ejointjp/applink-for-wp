@@ -38,9 +38,54 @@ function litoal_options_page_html() {
 	<?php
 }
 
+// オプション値のサニタイズ
+function litoal_sanitize_options( $input ) {
+	$sanitized = array();
+
+	// トークンのサニタイズ（英数字のみ許可）
+	if ( isset( $input['token'] ) ) {
+		$sanitized['token'] = sanitize_text_field( $input['token'] );
+	}
+
+	// nocssのサニタイズ（1 または 空）
+	$sanitized['nocss'] = isset( $input['nocss'] ) ? 1 : 0;
+
+	// limitのサニタイズ（許可された値のみ）
+	$allowed_limits = array( 10, 25, 50, 100, 200 );
+	if ( isset( $input['limit'] ) && in_array( (int) $input['limit'], $allowed_limits, true ) ) {
+		$sanitized['limit'] = (int) $input['limit'];
+	} else {
+		$sanitized['limit'] = 10; // デフォルト値
+	}
+
+	// countryのサニタイズ（許可された値のみ）
+	$allowed_countries = array( 'JP', 'US', 'KR', 'CN' );
+	if ( isset( $input['country'] ) && in_array( $input['country'], $allowed_countries, true ) ) {
+		$sanitized['country'] = sanitize_text_field( $input['country'] );
+	} else {
+		$sanitized['country'] = 'JP'; // デフォルト値
+	}
+
+	// langのサニタイズ（許可された値のみ）
+	$allowed_langs = array( 'ja_jp', 'en_us' );
+	if ( isset( $input['lang'] ) && in_array( $input['lang'], $allowed_langs, true ) ) {
+		$sanitized['lang'] = sanitize_text_field( $input['lang'] );
+	} else {
+		$sanitized['lang'] = 'ja_jp'; // デフォルト値
+	}
+
+	return $sanitized;
+}
+
 // ページの初期化
 function litoal_page_init() {
-	register_setting( 'litoal-setting', 'litoal-setting', 'sanitize' );
+	register_setting(
+		'litoal-setting',
+		'litoal-setting',
+		array(
+			'sanitize_callback' => 'litoal_sanitize_options',
+		)
+	);
 	add_settings_section( 'litoal-setting-section-id', '', '', 'litoal-setting' );
 
 	add_settings_field( 'token', 'PHGトークン', 'litoal_token_callback', 'litoal-setting', 'litoal-setting-section-id' );
