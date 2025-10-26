@@ -47,16 +47,7 @@ function litob_categories( $categories, $post ) {
 }
 add_filter( 'block_categories_all', 'litob_categories', 10, 2 );
 
-// フロントとエディターに読み込み
-function litob_variables_enqueue() {
-	wp_enqueue_style(
-		'litob-variables',
-		plugins_url( '/css/variables.css', __FILE__ ),
-		array(),
-		filemtime( plugin_dir_path( __FILE__ ) . '/css/variables.css' )
-	);
-}
-add_action( 'enqueue_block_assets', 'litob_variables_enqueue', 11 );
+
 
 // オプション値の初期化
 function litoal_register_activation() {
