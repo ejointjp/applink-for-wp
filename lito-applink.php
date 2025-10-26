@@ -127,11 +127,44 @@ add_action( 'admin_enqueue_scripts', 'litoal_admin_enqueue_scripts' );
 
 // Ajaxで返す値
 function litoal_ajax() {
-	if ( wp_verify_nonce( $_POST['nonce'], 'litoal-ajax' ) ) {
-
-		$URL = $_POST['url']; //取得したいサイトのURL
-		echo file_get_contents( $URL );
+	if ( ! wp_verify_nonce( $_POST['nonce'], 'litoal-ajax' ) ) {
+		wp_send_json_error( array( 'message' => 'Invalid nonce' ) );
 		die();
 	}
+
+	$url = isset( $_POST['url'] ) ? $_POST['url'] : '';
+
+	// URLの検証
+	$parsed_url = parse_url( $url );
+
+	// プロトコルがhttpsであることを確認
+	if ( ! isset( $parsed_url['scheme'] ) || 'https' !== $parsed_url['scheme'] ) {
+		wp_send_json_error( array( 'message' => 'Invalid protocol' ) );
+		die();
+	}
+
+	// ホスト名がitunes.apple.comであることを確認
+	if ( ! isset( $parsed_url['host'] ) || 'itunes.apple.com' !== $parsed_url['host'] ) {
+		wp_send_json_error( array( 'message' => 'Invalid host' ) );
+		die();
+	}
+
+	// URLの取得
+	$response = wp_remote_get(
+		$url,
+		array(
+			'timeout' => 15,
+		)
+	);
+
+	// エラーハンドリング
+	if ( is_wp_error( $response ) ) {
+		wp_send_json_error( array( 'message' => $response->get_error_message() ) );
+		die();
+	}
+
+	$body = wp_remote_retrieve_body( $response );
+	echo $body;
+	die();
 }
 add_action( 'wp_ajax_litoal-action', 'litoal_ajax' );
