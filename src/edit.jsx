@@ -23,7 +23,14 @@ import {
 
 // PHPから取得した変数
 // eslint-disable-next-line no-undef
-const { options, optionsPageUrl, limitValues, countryValues, langValues } =
+const {
+	options,
+	optionsPageUrl,
+	limitValues,
+	countryValues,
+	langValues,
+	countryToLangMap,
+} =
 	// eslint-disable-next-line no-undef
 	litoalAjaxValues;
 
@@ -37,12 +44,15 @@ const edit = (props) => {
 	// const [entity, setEntity] = useState('software');
 	const [state, setState] = useState('');
 	const [limit, setLimit] = useState(options.limit || 10);
-	const [lang, setLang] = useState(options.lang || 'ja_JP');
+	const [lang, setLang] = useState(options.lang || 'auto');
 	const [country, setCountry] = useState(options.country || 'JP');
 
 	const fetchData = useCallback(async () => {
 		const searchParams = new URLSearchParams();
-		searchParams.append('lang', lang);
+		// 'auto'が選択されている場合は選択した国に応じた言語を使用
+		const actualLang =
+			lang === 'auto' ? countryToLangMap[country] || 'en_us' : lang;
+		searchParams.append('lang', actualLang);
 		searchParams.append('country', country);
 		searchParams.append('entity', entity);
 		searchParams.append('term', term);
@@ -63,7 +73,16 @@ const edit = (props) => {
 			setState('result-error');
 			console.error(e);
 		}
-	}, [lang, country, entity, term, limit, options.token, setAttributes]);
+	}, [
+		lang,
+		country,
+		entity,
+		term,
+		limit,
+		options.token,
+		countryToLangMap,
+		setAttributes,
+	]);
 
 	// Termが変更されている場合はTermを更新
 	const setTermIfChanged = () => {

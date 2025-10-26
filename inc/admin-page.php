@@ -57,7 +57,7 @@ function litoal_sanitize_options( $input ) {
 	}
 
 	// countryのサニタイズ（許可された値のみ）
-	$allowed_countries = array( 'JP', 'US', 'KR', 'CN' );
+	$allowed_countries = array( 'JP', 'KR', 'CN', 'TW', 'HK', 'US', 'GB', 'CA', 'AU', 'SG', 'TH', 'IN', 'DE', 'FR', 'BR' );
 	if ( isset( $input['country'] ) && in_array( $input['country'], $allowed_countries, true ) ) {
 		$sanitized['country'] = sanitize_text_field( $input['country'] );
 	} else {
@@ -65,11 +65,11 @@ function litoal_sanitize_options( $input ) {
 	}
 
 	// langのサニタイズ（許可された値のみ）
-	$allowed_langs = array( 'ja_jp', 'en_us' );
+	$allowed_langs = array( 'auto', 'en_us' );
 	if ( isset( $input['lang'] ) && in_array( $input['lang'], $allowed_langs, true ) ) {
 		$sanitized['lang'] = sanitize_text_field( $input['lang'] );
 	} else {
-		$sanitized['lang'] = 'ja_jp'; // デフォルト値
+		$sanitized['lang'] = 'auto'; // デフォルト値
 	}
 
 	return $sanitized;

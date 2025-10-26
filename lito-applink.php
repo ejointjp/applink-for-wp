@@ -57,7 +57,7 @@ function litoal_register_activation() {
 		$default = array(
 			'token'   => '11l64V',
 			'country' => 'JP',
-			'lang'    => 'ja_jp',
+			'lang'    => 'auto',
 		);
 
 		update_option( 'litoal-setting', $default );
@@ -79,11 +79,12 @@ function litoal_admin_enqueue_scripts() {
 		'lito-applink-editor-script',
 		'litoalAjaxValues',
 		array(
-			'optionsPageUrl' => admin_url( 'options-general.php?page=litoal-setting' ),
-			'options'        => get_option( 'litoal-setting' ),
-			'limitValues'    => LITOAL_LIMIT_VALUES,
-			'countryValues'  => LITOAL_COUNTRY_VALUES,
-			'langValues'     => LITOAL_LANG_VALUES,
+			'optionsPageUrl'   => admin_url( 'options-general.php?page=litoal-setting' ),
+			'options'          => get_option( 'litoal-setting' ),
+			'limitValues'      => LITOAL_LIMIT_VALUES,
+			'countryValues'    => LITOAL_COUNTRY_VALUES,
+			'langValues'       => LITOAL_LANG_VALUES,
+			'countryToLangMap' => LITOAL_COUNTRY_TO_LANG_MAP,
 		)
 	);
 }
