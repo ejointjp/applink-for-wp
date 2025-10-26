@@ -136,7 +136,7 @@ const edit = (props) => {
 					}}
 				>
 					<div className='wp-applink-figure'>
-						<img className='wp-applink-img' src={app.iconUrl} />
+						<img className='wp-applink-img' src={app.iconUrl} alt={app.title} />
 					</div>
 					<div className='wp-applink-content'>
 						<div className='wp-applink-title'>{app.title}</div>
