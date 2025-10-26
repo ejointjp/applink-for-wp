@@ -33,39 +33,30 @@ add_action( 'init', 'litoal_init' );
  * @param array $categories Categories.
  * @param array $post Post.
  */
-if ( ! function_exists( 'litob_categories' ) ) {
-	function litob_categories( $categories, $post ) {
-		return array_merge(
-			$categories,
+function litob_categories( $categories, $post ) {
+	return array_merge(
+		$categories,
+		array(
 			array(
-				array(
-					'slug'  => 'lito-blocks', // ブロックカテゴリーのスラッグ.
-					'title' => 'LitoBlocks', // ブロックカテゴリーの表示名.
-					// 'icon'  => 'wordpress',    //アイコンの指定（Dashicons名）.
-				),
-			)
-		);
-	}
-	add_filter( 'block_categories_all', 'litob_categories', 10, 2 );
+				'slug'  => 'lito-blocks', // ブロックカテゴリーのスラッグ.
+				'title' => 'LitoBlocks', // ブロックカテゴリーの表示名.
+				// 'icon'  => 'wordpress',    //アイコンの指定（Dashicons名）.
+			),
+		)
+	);
 }
+add_filter( 'block_categories_all', 'litob_categories', 10, 2 );
 
 // フロントとエディターに読み込み
-if ( ! function_exists( 'litob_variables_enqueue' ) ) {
-	function litob_variables_enqueue() {
-		wp_enqueue_style(
-			'litob-variables',
-			plugins_url( '/css/variables.css', __FILE__ ),
-			array(),
-			filemtime( plugin_dir_path( __FILE__ ) . '/css/variables.css' )
-		);
-	}
-	add_action( 'enqueue_block_assets', 'litob_variables_enqueue', 11 );
+function litob_variables_enqueue() {
+	wp_enqueue_style(
+		'litob-variables',
+		plugins_url( '/css/variables.css', __FILE__ ),
+		array(),
+		filemtime( plugin_dir_path( __FILE__ ) . '/css/variables.css' )
+	);
 }
-
-// プラグイン有効時に実行
-if ( function_exists( 'litoal_register_activation' ) ) {
-	register_activation_hook( __FILE__, 'litoal_register_activation' );
-}
+add_action( 'enqueue_block_assets', 'litob_variables_enqueue', 11 );
 
 // オプション値の初期化
 function litoal_register_activation() {
@@ -81,23 +72,8 @@ function litoal_register_activation() {
 		update_option( 'litoal-setting', $default );
 	}
 }
-
-// ブロックのカテゴリー登録
-if ( ! function_exists( 'litoal_su_categories' ) ) {
-	function litoal_su_categories( $categories, $post ) {
-		return array_merge(
-			$categories,
-			array(
-				array(
-					'slug'  => 'su',   // ブロックカテゴリーのスラッグ.
-					'title' => 'su blocks',  // ブロックカテゴリーの表示名.
-				),
-			)
-		);
-	}
-	add_filter( 'block_categories_all', 'litoal_su_categories', 10, 2 );
-}
-
+// プラグイン有効時に実行
+register_activation_hook( __FILE__, 'litoal_register_activation' );
 
 function litoal_admin_enqueue_scripts() {
 	/**
