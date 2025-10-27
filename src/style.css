@@ -124,7 +124,7 @@
 	background-color: #f43f5e; /* rose-500 */
 }
 
-@container (768px <= width) {
+@container (min-width: 32rem) {
 	.alfwp-title {
 		font-size: 1rem;
 	}
