@@ -4,7 +4,12 @@ import {
 	InspectorControls,
 } from '@wordpress/block-editor';
 import { useState, useEffect, useCallback } from '@wordpress/element';
-import { PanelBody, SelectControl, BaseControl } from '@wordpress/components';
+import {
+	PanelBody,
+	SelectControl,
+	BaseControl,
+	Button,
+} from '@wordpress/components';
 
 import ReactLoading from 'react-loading';
 import Applink from './components/Applink';
@@ -139,14 +144,15 @@ const edit = (props) => {
 						<div className='wp-applink-title'>{app.title}</div>
 						<div className='wp-applink-artist'>{app.artist}</div>
 					</div>
-					<button
-						className='components-button is-secondary'
+					<Button
+						variant='secondary'
+						size='small'
 						onClick={() => {
 							setAttributes({ app: app });
 						}}
 					>
 						選択
-					</button>
+					</Button>
 				</div>
 			);
 		});
@@ -228,14 +234,14 @@ const edit = (props) => {
 						/>
 
 						<p>
-							<a
+							<Button
 								href={optionsPageUrl}
 								target='_blank'
 								rel='nofollow noreferrer noopener'
-								className='components-button is-tertiary'
+								variant='tertiary'
 							>
 								設定ページでデフォルト値を設定する
-							</a>
+							</Button>
 						</p>
 					</BaseControl>
 				</PanelBody>
