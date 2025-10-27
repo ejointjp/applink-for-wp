@@ -4,4 +4,4 @@ if ( ! defined( 'ABSPATH' ) || ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-delete_option( 'litoal-setting' );
+delete_option( 'alfwp-setting' );

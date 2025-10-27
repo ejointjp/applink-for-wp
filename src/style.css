@@ -1,11 +1,11 @@
-.litoal,
+.alfwp,
 .wp-applink-wrapper {
 	--color-dark-gray: #18181b;
 	--color-gray: #52525c;
 	--color-light-gray: #e4e4e7;
 	--color-base-gray: #f4f4f5;
 	--color-background: #fff;
-	--border-radius: 0.5rem;
+	--border-radius: 1rem;
 	--padding: 1rem;
 	--gap: 1rem;
 	--image-width: 5rem;
@@ -23,7 +23,7 @@
 	--color-base-gray: #27272a;
 }
 
-.litoal-link {
+.alfwp-link {
 	overflow: hidden;
 	display: flex;
 	gap: 1.5rem;
@@ -43,39 +43,44 @@
 	}
 }
 
-.litoal-img {
+.alfwp-img {
 	width: 5rem;
-	border-radius: var(--border-radius);
+	border-radius: 0.5rem;
 }
 
-.litoal-music-video .litoal-img {
-	width: 6.5rem;
+.alfwp-music-video .alfwp-img {
+	aspect-ratio: 16 / 9;
+	width: 8rem;
+	object-fit: cover;
+	object-position: center center;
 }
 
-.litoal-app & .litoal-img {
-	border-radius: 24%;
+.alfwp-app .alfwp-img {
+	border-radius: 25%;
 }
 
-.litoal-title {
+.alfwp-title {
 	display: block;
+
+	font-size: 0.875rem;
 	font-weight: 600;
 	color: var(--color-dark-gray);
 	text-decoration: none;
 }
 
-.litoal-artist {
+.alfwp-artist {
 	margin-top: 0.25rem;
 	font-size: 0.75rem;
 	color: var(--color-gray);
 }
 
-.litoal-btns {
+.alfwp-btns {
 	display: flex;
 	gap: 1rem;
 	margin-top: 1rem;
 }
 
-.litoal-btn {
+.alfwp-btn {
 	display: flex;
 	flex-shrink: 0;
 	gap: 0.25rem;
@@ -90,32 +95,37 @@
 	border-radius: 999px;
 }
 
-.litoal-audition {
+.alfwp-audition {
 	color: #3f3f46;
 	background-color: #f4f4f5;
 }
 
-.litoal-store {
+.alfwp-store {
 	color: var(--color-background) !important;
 }
 
-:is(.litoal-app, .litoal-mac-app) .litoal-store {
+:is(.alfwp-app, .alfwp-mac-app) .alfwp-store {
 	background-color: #3b82f6 !important; /* blue-500 */
 }
 
-.litoal-movie .litoal-store {
+.alfwp-movie .alfwp-store {
 	background-color: #18181b; /* zinc-900 */
 }
 
-:is(.litoal-ebook, .litoal-audiobook) .litoal-store {
+:is(.alfwp-ebook, .alfwp-audiobook) .alfwp-store {
 	background-color: #f59e0b; /* amber-500 */
 }
 
-.litoal-podcast .litoal-store {
+.alfwp-podcast .alfwp-store {
 	background-color: #8b5cf6; /* violet-500 */
 }
 
-:is(.litoal-music-track, .litoal-music-album, .litoal-music-video)
-	.litoal-store {
+:is(.alfwp-music-track, .alfwp-music-album, .alfwp-music-video) .alfwp-store {
 	background-color: #f43f5e; /* rose-500 */
+}
+
+@container (768px <= width) {
+	.alfwp-title {
+		font-size: 1rem;
+	}
 }

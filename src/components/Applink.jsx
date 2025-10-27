@@ -3,45 +3,45 @@ import { StoreIcon } from './StoreIcon';
 
 const Applink = (props) => {
 	return (
-		<div className={`litoal litoal-${props.app.type}`}>
-			<div className='litoal-link'>
+		<div className={`alfwp alfwp-${props.app.type}`}>
+			<div className='alfwp-link'>
 				<a
-					className='litoal-figure'
+					className='alfwp-figure'
 					href={props.app.url}
 					target='_blank'
 					rel='noopener nofollow noreferrer'
 				>
 					<img
-						className='litoal-img'
+						className='alfwp-img'
 						src={props.app.iconUrl}
 						alt={props.app.title}
 					/>
 				</a>
-				<div className='litoal-content'>
+				<div className='alfwp-content'>
 					<a
-						className='litoal-title'
+						className='alfwp-title'
 						href={props.app.url}
 						target='_blank'
 						rel='noopener nofollow noreferrer'
 					>
 						{props.app.title}
 					</a>
-					<div className='litoal-artist'>{props.app.artist}</div>
+					<div className='alfwp-artist'>{props.app.artist}</div>
 
-					<div className='litoal-btns'>
+					<div className='alfwp-btns'>
 						{props.app.previewUrl && (
 							<a
-								className='litoal-audition litoal-btn'
+								className='alfwp-audition alfwp-btn'
 								href={props.app.previewUrl}
 								target='_blank'
 								rel='noopener nofollow noreferrer'
 							>
 								<HiPlay />
-								<span className='litoal-btn-label'>試聴</span>
+								<span className='alfwp-btn-label'>試聴</span>
 							</a>
 						)}
 						<a
-							className='litoal-store litoal-btn'
+							className='alfwp-store alfwp-btn'
 							href={props.app.url}
 							target='_blank'
 							rel='noopener nofollow noreferrer'

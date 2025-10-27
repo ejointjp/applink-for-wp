@@ -32,7 +32,7 @@ const {
 	countryToLangMap,
 } =
 	// eslint-disable-next-line no-undef
-	litoalAjaxValues;
+	alfwpAjaxValues;
 
 const edit = (props) => {
 	const blockProps = useBlockProps({ className: 'wp-applink-wrapper' });

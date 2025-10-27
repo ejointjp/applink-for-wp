@@ -1,22 +1,22 @@
 <?php
 
 // 管理画面に設定画面を追加
-function litoal_add_admin_page() {
+function alfwp_add_admin_page() {
 	add_options_page(
-		'LitoBlocks Applink',
-		'LitoBlocks Applink',
+		'Applink for WP',
+		'Applink for WP',
 		'manage_options',
-		'litoal-setting',
-		'litoal_options_page_html'
+		'applink-for-wp',
+		'alfwp_options_page_html'
 	);
 }
-add_action( 'admin_menu', 'litoal_add_admin_page' );
+add_action( 'admin_menu', 'alfwp_add_admin_page' );
 
 // ページの内容
-function litoal_options_page_html() {
+function alfwp_options_page_html() {
 	?>
 	<div class="wrap">
-	<h2>LitoBlocks Applink</h2>
+	<h2>Applink for WP</h2>
 
 	<?php
 	global $parent_file;
@@ -27,8 +27,8 @@ function litoal_options_page_html() {
 
 	<form method="post" action="options.php">
 		<?php
-		settings_fields( 'litoal-setting' );
-		do_settings_sections( 'litoal-setting' );
+		settings_fields( 'alfwp-setting' );
+		do_settings_sections( 'alfwp-setting' );
 		submit_button();
 		?>
 	</form>
@@ -37,7 +37,7 @@ function litoal_options_page_html() {
 }
 
 // オプション値のサニタイズ
-function litoal_sanitize_options( $input ) {
+function alfwp_sanitize_options( $input ) {
 	$sanitized = array();
 
 	// トークンのサニタイズ（英数字のみ許可）
@@ -73,37 +73,37 @@ function litoal_sanitize_options( $input ) {
 }
 
 // ページの初期化
-function litoal_page_init() {
+function alfwp_page_init() {
 	register_setting(
-		'litoal-setting',
-		'litoal-setting',
+		'alfwp-setting',
+		'alfwp-setting',
 		array(
-			'sanitize_callback' => 'litoal_sanitize_options',
+			'sanitize_callback' => 'alfwp_sanitize_options',
 		)
 	);
-	add_settings_section( 'litoal-setting-section-id', '', '', 'litoal-setting' );
+	add_settings_section( 'alfwp-setting-section-id', '', '', 'alfwp-setting' );
 
-	add_settings_field( 'token', 'PHGトークン', 'litoal_token_callback', 'litoal-setting', 'litoal-setting-section-id' );
-	add_settings_field( 'limit', 'デフォルトの検索結果数', 'litoal_limit_callback', 'litoal-setting', 'litoal-setting-section-id' );
-	add_settings_field( 'country', 'デフォルトの検索対象ストア', 'litoal_country_callback', 'litoal-setting', 'litoal-setting-section-id' );
-	add_settings_field( 'lang', 'デフォルトの表示言語', 'litoal_lang_callback', 'litoal-setting', 'litoal-setting-section-id' );
+	add_settings_field( 'token', 'PHGトークン', 'alfwp_token_callback', 'alfwp-setting', 'alfwp-setting-section-id' );
+	add_settings_field( 'limit', 'デフォルトの検索結果数', 'alfwp_limit_callback', 'alfwp-setting', 'alfwp-setting-section-id' );
+	add_settings_field( 'country', 'デフォルトの検索対象ストア', 'alfwp_country_callback', 'alfwp-setting', 'alfwp-setting-section-id' );
+	add_settings_field( 'lang', 'デフォルトの表示言語', 'alfwp_lang_callback', 'alfwp-setting', 'alfwp-setting-section-id' );
 }
-add_action( 'admin_init', 'litoal_page_init' );
+add_action( 'admin_init', 'alfwp_page_init' );
 
 // トークンの設定セクション
-function litoal_token_callback() {
-	$options = get_option( 'litoal-setting' );
+function alfwp_token_callback() {
+	$options = get_option( 'alfwp-setting' );
 	$token   = isset( $options['token'] ) ? $options['token'] : '';
-	printf( '<input type="text" name="litoal-setting[token]" size="30" value="%s">', esc_attr( $token ) );
+	printf( '<input type="text" name="alfwp-setting[token]" size="30" value="%s">', esc_attr( $token ) );
 }
 
 // 検索結果数の設定セクション
-function litoal_limit_callback() {
-	$options    = get_option( 'litoal-setting' );
+function alfwp_limit_callback() {
+	$options    = get_option( 'alfwp-setting' );
 	$option_val = isset( $options['limit'] ) ? $options['limit'] : 10;
 	$values     = array( 10, 25, 50, 100, 200 );
 
-	echo '<select name="litoal-setting[limit]">';
+	echo '<select name="alfwp-setting[limit]">';
 	foreach ( $values as $val ) {
 		printf( '<option value="%1$d" %2$s>%1$d</option>', $val, selected( $option_val, $val, false ) );
 	}
@@ -111,12 +111,12 @@ function litoal_limit_callback() {
 }
 
 // 国の設定セクション
-function litoal_country_callback() {
-	$options    = get_option( 'litoal-setting' );
+function alfwp_country_callback() {
+	$options    = get_option( 'alfwp-setting' );
 	$option_val = isset( $options['country'] ) ? $options['country'] : 'JP';
 
-	echo '<select name="litoal-setting[country]">';
-	foreach ( LITOAL_COUNTRY_VALUES as $item ) {
+	echo '<select name="alfwp-setting[country]">';
+	foreach ( ALFWP_COUNTRY_VALUES as $item ) {
 		printf( '<option value="%s" %s>%s</option>', $item['value'], selected( $option_val, $item['value'], false ), $item['label'] );
 	}
 	echo '</select>';
@@ -124,12 +124,12 @@ function litoal_country_callback() {
 }
 
 // 言語の設定セクション
-function litoal_lang_callback() {
-	$options    = get_option( 'litoal-setting' );
+function alfwp_lang_callback() {
+	$options    = get_option( 'alfwp-setting' );
 	$option_val = isset( $options['lang'] ) ? $options['lang'] : 'auto';
 
-	echo '<select name="litoal-setting[lang]">';
-	foreach ( LITOAL_LANG_VALUES as $item ) {
+	echo '<select name="alfwp-setting[lang]">';
+	foreach ( ALFWP_LANG_VALUES as $item ) {
 		printf( '<option value="%s" %s>%s</option>', $item['value'], selected( $option_val, $item['value'], false ), $item['label'] );
 	}
 	echo '</select>';

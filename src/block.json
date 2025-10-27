@@ -1,42 +1,42 @@
 {
-  "$schema": "https://schemas.wp.org/trunk/block.json",
-  "apiVersion": 3,
-  "name": "lito/applink",
-  "version": "0.1.0",
-  "title": "LitoBlocks Applink",
-  "category": "lito-blocks",
-  "icon": "instagram",
-  "description": "",
-  "example": {},
-  "supports": {
-    "html": false
-  },
-  "textdomain": "lito-applink",
-  "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css",
-  "keywords": [
-    "リンク",
-    "埋め込み",
-    "アプリ",
-    "apple",
-    "app",
-    "embed",
-    "link",
-    "itunes",
-    "iphone",
-    "ipad",
-    "mac",
-    "book"
-  ],
-  "attributes": {
-    "app": {
-      "type": "object",
-      "default": {}
-    },
-    "entity": {
-      "type": "string",
-      "default": "software"
-    }
-  }
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "alfwp/applink",
+	"version": "0.1.0",
+	"title": "Applink",
+	"category": "alfwp-blocks",
+	"icon": "instagram",
+	"description": "",
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "applink-for-wp",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"keywords": [
+		"リンク",
+		"埋め込み",
+		"アプリ",
+		"apple",
+		"app",
+		"embed",
+		"link",
+		"itunes",
+		"iphone",
+		"ipad",
+		"mac",
+		"book"
+	],
+	"attributes": {
+		"app": {
+			"type": "object",
+			"default": {}
+		},
+		"entity": {
+			"type": "string",
+			"default": "software"
+		}
+	}
 }
