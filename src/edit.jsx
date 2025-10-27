@@ -41,7 +41,7 @@ const {
 
 const edit = (props) => {
 	const blockProps = useBlockProps({ className: 'sual-editor-wrapper' });
-	const { attributes, setAttributes } = props;
+	const { attributes, setAttributes, isSelected } = props;
 	const { app, entity } = attributes;
 	const [result, setResult] = useState({});
 	const [term, setTerm] = useState('');
@@ -251,27 +251,29 @@ const edit = (props) => {
 				</PanelBody>
 			</InspectorControls>
 
-			<div className='sual-editor-control'>
-				<SelectControl
-					className='sual-editor-type'
-					value={entity}
-					onChange={(value) => {
-						// setEntity(value);
-						setAttributes({ entity: value });
-						setTermIfChanged();
-					}}
-					options={entityOptions}
-				/>
+			{isSelected && (
+				<div className='sual-editor-control'>
+					<SelectControl
+						className='sual-editor-type'
+						value={entity}
+						onChange={(value) => {
+							// setEntity(value);
+							setAttributes({ entity: value });
+							setTermIfChanged();
+						}}
+						options={entityOptions}
+					/>
 
-				<PlainText
-					className='sual-editor-input'
-					tagName='input'
-					placeholder='検索ワードを入力してEnter'
-					value={tempTerm}
-					onChange={(value) => setTempTerm(value)}
-					onKeyPress={onKeyPress}
-				/>
-			</div>
+					<PlainText
+						className='sual-editor-input'
+						tagName='input'
+						placeholder='検索ワードを入力してEnter'
+						value={tempTerm}
+						onChange={(value) => setTempTerm(value)}
+						onKeyPress={onKeyPress}
+					/>
+				</div>
+			)}
 
 			<Display />
 			{hasApp && <Applink app={app} />}
