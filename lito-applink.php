@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Plugin Name:       LitoBlocks Applink
+ * Plugin Name:       Applink　for WP
  * Description:       iPhone / iPad / Macアプリや音楽トラック、Apple Booksなどの紹介リンクを簡単に作成できます。
- * Requires at least: 6.1
- * Requires PHP:      7.0
- * Version:           0.1.0
+ * Requires at least: 6.8
+ * Requires PHP:      7.4
+ * Version:           1.0.0
  * Author:            Takashi Fujiskai
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       lito-applink
+ * Text Domain:       applink-for-wp
  *
- * @package           lito-applink
+ * @package           applink-for-wp
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
