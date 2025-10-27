@@ -7,7 +7,6 @@
 	--color-background: #fff;
 	--border-radius: 1rem;
 	--padding: 1rem;
-	--gap: 1rem;
 	--image-width: 5rem;
 	--image-height: 5rem;
 	--bg-color: #ffc0cb;
@@ -44,19 +43,19 @@
 }
 
 .sual-img {
-	width: 5rem;
+	width: 4rem;
 	border-radius: 0.5rem;
-}
 
-.sual-music-video .sual-img {
-	aspect-ratio: 16 / 9;
-	width: 8rem;
-	object-fit: cover;
-	object-position: center center;
-}
+	.sual-app & {
+		border-radius: 25%;
+	}
 
-.sual-app .sual-img {
-	border-radius: 25%;
+	.sual-music-video & {
+		aspect-ratio: 16 / 9;
+		width: 8rem;
+		object-fit: cover;
+		object-position: center center;
+	}
 }
 
 .sual-title {
