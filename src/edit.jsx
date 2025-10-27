@@ -40,7 +40,7 @@ const {
 	sualAjaxValues;
 
 const edit = (props) => {
-	const blockProps = useBlockProps({ className: 'wp-applink-wrapper' });
+	const blockProps = useBlockProps({ className: 'sual-editor-wrapper' });
 	const { attributes, setAttributes } = props;
 	const { app, entity } = attributes;
 	const [result, setResult] = useState({});
@@ -131,18 +131,22 @@ const edit = (props) => {
 
 			return (
 				<div
-					className={`wp-applink-item wp-applink-${item.kind}`}
+					className={`sual-editor-item sual-editor-${item.kind}`}
 					key={i}
 					onClick={() => {
 						setAttributes({ app: app });
 					}}
 				>
-					<div className='wp-applink-figure'>
-						<img className='wp-applink-img' src={app.iconUrl} alt={app.title} />
+					<div className='sual-editor-figure'>
+						<img
+							className='sual-editor-img'
+							src={app.iconUrl}
+							alt={app.title}
+						/>
 					</div>
-					<div className='wp-applink-content'>
-						<div className='wp-applink-title'>{app.title}</div>
-						<div className='wp-applink-artist'>{app.artist}</div>
+					<div className='sual-editor-content'>
+						<div className='sual-editor-title'>{app.title}</div>
+						<div className='sual-editor-artist'>{app.artist}</div>
 					</div>
 					<Button
 						variant='secondary'
@@ -159,11 +163,11 @@ const edit = (props) => {
 
 		return (
 			<>
-				<div className='wp-applink-result-num'>
+				<div className='sual-editor-result-num'>
 					検索結果{result.resultCount} 件
 				</div>
 				{result.resultCount > 0 && (
-					<div className='wp-applink-list'>{list}</div>
+					<div className='sual-editor-list'>{list}</div>
 				)}
 			</>
 		);
@@ -247,9 +251,9 @@ const edit = (props) => {
 				</PanelBody>
 			</InspectorControls>
 
-			<div className='wp-applink-control'>
+			<div className='sual-editor-control'>
 				<SelectControl
-					className='wp-applink-type'
+					className='sual-editor-type'
 					value={entity}
 					onChange={(value) => {
 						// setEntity(value);
@@ -260,7 +264,7 @@ const edit = (props) => {
 				/>
 
 				<PlainText
-					className='wp-applink-input'
+					className='sual-editor-input'
 					tagName='input'
 					placeholder='検索ワードを入力してEnter'
 					value={tempTerm}
