@@ -1,4 +1,4 @@
-.alfwp,
+.sual,
 .wp-applink-wrapper {
 	--color-dark-gray: #18181b;
 	--color-gray: #52525c;
@@ -23,7 +23,7 @@
 	--color-base-gray: #27272a;
 }
 
-.alfwp {
+.sual {
 	overflow: hidden;
 	display: flex;
 	gap: 1.5rem;
@@ -43,23 +43,23 @@
 	}
 }
 
-.alfwp-img {
+.sual-img {
 	width: 5rem;
 	border-radius: 0.5rem;
 }
 
-.alfwp-music-video .alfwp-img {
+.sual-music-video .sual-img {
 	aspect-ratio: 16 / 9;
 	width: 8rem;
 	object-fit: cover;
 	object-position: center center;
 }
 
-.alfwp-app .alfwp-img {
+.sual-app .sual-img {
 	border-radius: 25%;
 }
 
-.alfwp-title {
+.sual-title {
 	display: block;
 
 	font-size: 0.875rem;
@@ -68,19 +68,19 @@
 	text-decoration: none;
 }
 
-.alfwp-artist {
+.sual-artist {
 	margin-top: 0.25rem;
 	font-size: 0.75rem;
 	color: var(--color-gray);
 }
 
-.alfwp-btns {
+.sual-btns {
 	display: flex;
 	gap: 1rem;
 	margin-top: 1rem;
 }
 
-.alfwp-btn {
+.sual-btn {
 	display: flex;
 	flex-shrink: 0;
 	gap: 0.25rem;
@@ -95,37 +95,37 @@
 	border-radius: 999px;
 }
 
-.alfwp-audition {
+.sual-audition {
 	color: #3f3f46;
 	background-color: #f4f4f5;
 }
 
-.alfwp-store {
+.sual-store {
 	color: var(--color-background) !important;
 }
 
-:is(.alfwp-app, .alfwp-mac-app) .alfwp-store {
+:is(.sual-app, .sual-mac-app) .sual-store {
 	background-color: #3b82f6 !important; /* blue-500 */
 }
 
-.alfwp-movie .alfwp-store {
+.sual-movie .sual-store {
 	background-color: #18181b; /* zinc-900 */
 }
 
-:is(.alfwp-ebook, .alfwp-audiobook) .alfwp-store {
+:is(.sual-ebook, .sual-audiobook) .sual-store {
 	background-color: #f59e0b; /* amber-500 */
 }
 
-.alfwp-podcast .alfwp-store {
+.sual-podcast .sual-store {
 	background-color: #8b5cf6; /* violet-500 */
 }
 
-:is(.alfwp-music-track, .alfwp-music-album, .alfwp-music-video) .alfwp-store {
+:is(.sual-music-track, .sual-music-album, .sual-music-video) .sual-store {
 	background-color: #f43f5e; /* rose-500 */
 }
 
 @container (min-width: 32rem) {
-	.alfwp-title {
+	.sual-title {
 		font-size: 1rem;
 	}
 }

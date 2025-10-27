@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name:       Applink for WP
+ * Plugin Name:       SU Applink
  * Description:       iPhone / iPad / Macアプリや音楽トラック、Apple Booksなどの紹介リンクを簡単に作成できます。
  * Requires at least: 6.8
  * Requires PHP:      7.4
@@ -9,9 +9,9 @@
  * Author:            Takashi Fujiskai
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       applink-for-wp
+ * Text Domain:       su-applink
  *
- * @package           applink-for-wp
+ * @package           su-applink
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,10 +22,10 @@ require_once plugin_dir_path( __FILE__ ) . 'inc/define.php';
 require_once plugin_dir_path( __FILE__ ) . 'inc/admin-page.php';
 
 
-function alfwp_init() {
+function sual_init() {
 	register_block_type( __DIR__ . '/build' );
 }
-add_action( 'init', 'alfwp_init' );
+add_action( 'init', 'sual_init' );
 
 /**
  * Categories
@@ -33,25 +33,25 @@ add_action( 'init', 'alfwp_init' );
  * @param array $categories Categories.
  * @param array $post Post.
  */
-function alfwpb_categories( $categories, $post ) {
+function sual_categories( $categories, $post ) {
 	return array_merge(
 		$categories,
 		array(
 			array(
-				'slug'  => 'alfwp-blocks', // ブロックカテゴリーのスラッグ.
-				'title' => 'AlfwpBlocks', // ブロックカテゴリーの表示名.
+				'slug'  => 'su-blocks', // ブロックカテゴリーのスラッグ.
+				'title' => 'SU Blocks', // ブロックカテゴリーの表示名.
 				// 'icon'  => 'wordpress',    //アイコンの指定（Dashicons名）.
 			),
 		)
 	);
 }
-add_filter( 'block_categories_all', 'alfwpb_categories', 10, 2 );
+add_filter( 'block_categories_all', 'sual_categories', 10, 2 );
 
 
 
 // オプション値の初期化
-function alfwp_register_activation() {
-	$options = get_option( 'alfwp-setting' );
+function sual_register_activation() {
+	$options = get_option( 'sual-setting' );
 
 	if ( ! $options ) {
 		$default = array(
@@ -60,27 +60,27 @@ function alfwp_register_activation() {
 			'lang'    => 'auto',
 		);
 
-		update_option( 'alfwp-setting', $default );
+		update_option( 'sual-setting', $default );
 	}
 }
 // プラグイン有効時に実行
-register_activation_hook( __FILE__, 'alfwp_register_activation' );
+register_activation_hook( __FILE__, 'sual_register_activation' );
 
-function alfwp_admin_enqueue_scripts() {
+function sual_admin_enqueue_scripts() {
 	// PHPからJavaScriptに値を渡す
 	wp_add_inline_script(
 		'wp-block-editor',
-		'const alfwpAjaxValues = ' . wp_json_encode(
+		'const sualAjaxValues = ' . wp_json_encode(
 			array(
-				'optionsPageUrl'   => admin_url( 'options-general.php?page=applink-for-wp' ),
-				'options'          => get_option( 'alfwp-setting' ),
-				'limitValues'      => ALFWP_LIMIT_VALUES,
-				'countryValues'    => ALFWP_COUNTRY_VALUES,
-				'langValues'       => ALFWP_LANG_VALUES,
-				'countryToLangMap' => ALFWP_COUNTRY_TO_LANG_MAP,
+				'optionsPageUrl'   => admin_url( 'options-general.php?page=su-applink' ),
+				'options'          => get_option( 'sual-setting' ),
+				'limitValues'      => SUAL_LIMIT_VALUES,
+				'countryValues'    => SUAL_COUNTRY_VALUES,
+				'langValues'       => SUAL_LANG_VALUES,
+				'countryToLangMap' => SUAL_COUNTRY_TO_LANG_MAP,
 			)
 		) . ';',
 		'before'
 	);
 }
-add_action( 'admin_enqueue_scripts', 'alfwp_admin_enqueue_scripts' );
+add_action( 'admin_enqueue_scripts', 'sual_admin_enqueue_scripts' );

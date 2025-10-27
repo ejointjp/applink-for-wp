@@ -2,7 +2,7 @@
 
 // 検索結果数オプション
 define(
-	'ALFWP_LIMIT_VALUES',
+	'SUAL_LIMIT_VALUES',
 	array(
 		array(
 			'value' => 10,
@@ -29,7 +29,7 @@ define(
 
 // 言語設定オプション（自動と英語のみ）
 define(
-	'ALFWP_LANG_VALUES',
+	'SUAL_LANG_VALUES',
 	array(
 		array(
 			'value' => 'auto',
@@ -44,7 +44,7 @@ define(
 
 // 国コードから言語コードへのマッピング
 define(
-	'ALFWP_COUNTRY_TO_LANG_MAP',
+	'SUAL_COUNTRY_TO_LANG_MAP',
 	array(
 		'JP' => 'ja_jp',
 		'KR' => 'ko_kr',
@@ -66,7 +66,7 @@ define(
 
 // 国設定オプション（主要15カ国、使用頻度順）
 define(
-	'ALFWP_COUNTRY_VALUES',
+	'SUAL_COUNTRY_VALUES',
 	array(
 		// アジア主要国
 		array(

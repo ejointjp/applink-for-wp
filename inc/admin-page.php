@@ -1,19 +1,19 @@
 <?php
 
 // 管理画面に設定画面を追加
-function alfwp_add_admin_page() {
+function sual_add_admin_page() {
 	add_options_page(
 		'Applink for WP',
 		'Applink for WP',
 		'manage_options',
-		'applink-for-wp',
-		'alfwp_options_page_html'
+		'su-applink',
+		'sual_options_page_html'
 	);
 }
-add_action( 'admin_menu', 'alfwp_add_admin_page' );
+add_action( 'admin_menu', 'sual_add_admin_page' );
 
 // ページの内容
-function alfwp_options_page_html() {
+function sual_options_page_html() {
 	?>
 	<div class="wrap">
 	<h2>Applink for WP</h2>
@@ -27,8 +27,8 @@ function alfwp_options_page_html() {
 
 	<form method="post" action="options.php">
 		<?php
-		settings_fields( 'alfwp-setting' );
-		do_settings_sections( 'alfwp-setting' );
+		settings_fields( 'sual-setting' );
+		do_settings_sections( 'sual-setting' );
 		submit_button();
 		?>
 	</form>
@@ -37,7 +37,7 @@ function alfwp_options_page_html() {
 }
 
 // オプション値のサニタイズ
-function alfwp_sanitize_options( $input ) {
+function sual_sanitize_options( $input ) {
 	$sanitized = array();
 
 	// トークンのサニタイズ（英数字のみ許可）
@@ -73,37 +73,37 @@ function alfwp_sanitize_options( $input ) {
 }
 
 // ページの初期化
-function alfwp_page_init() {
+function sual_page_init() {
 	register_setting(
-		'alfwp-setting',
-		'alfwp-setting',
+		'sual-setting',
+		'sual-setting',
 		array(
-			'sanitize_callback' => 'alfwp_sanitize_options',
+			'sanitize_callback' => 'sual_sanitize_options',
 		)
 	);
-	add_settings_section( 'alfwp-setting-section-id', '', '', 'alfwp-setting' );
+	add_settings_section( 'sual-setting-section-id', '', '', 'sual-setting' );
 
-	add_settings_field( 'token', 'PHGトークン', 'alfwp_token_callback', 'alfwp-setting', 'alfwp-setting-section-id' );
-	add_settings_field( 'limit', 'デフォルトの検索結果数', 'alfwp_limit_callback', 'alfwp-setting', 'alfwp-setting-section-id' );
-	add_settings_field( 'country', 'デフォルトの検索対象ストア', 'alfwp_country_callback', 'alfwp-setting', 'alfwp-setting-section-id' );
-	add_settings_field( 'lang', 'デフォルトの表示言語', 'alfwp_lang_callback', 'alfwp-setting', 'alfwp-setting-section-id' );
+	add_settings_field( 'token', 'PHGトークン', 'sual_token_callback', 'sual-setting', 'sual-setting-section-id' );
+	add_settings_field( 'limit', 'デフォルトの検索結果数', 'sual_limit_callback', 'sual-setting', 'sual-setting-section-id' );
+	add_settings_field( 'country', 'デフォルトの検索対象ストア', 'sual_country_callback', 'sual-setting', 'sual-setting-section-id' );
+	add_settings_field( 'lang', 'デフォルトの表示言語', 'sual_lang_callback', 'sual-setting', 'sual-setting-section-id' );
 }
-add_action( 'admin_init', 'alfwp_page_init' );
+add_action( 'admin_init', 'sual_page_init' );
 
 // トークンの設定セクション
-function alfwp_token_callback() {
-	$options = get_option( 'alfwp-setting' );
+function sual_token_callback() {
+	$options = get_option( 'sual-setting' );
 	$token   = isset( $options['token'] ) ? $options['token'] : '';
-	printf( '<input type="text" name="alfwp-setting[token]" size="30" value="%s">', esc_attr( $token ) );
+	printf( '<input type="text" name="sual-setting[token]" size="30" value="%s">', esc_attr( $token ) );
 }
 
 // 検索結果数の設定セクション
-function alfwp_limit_callback() {
-	$options    = get_option( 'alfwp-setting' );
+function sual_limit_callback() {
+	$options    = get_option( 'sual-setting' );
 	$option_val = isset( $options['limit'] ) ? $options['limit'] : 10;
 	$values     = array( 10, 25, 50, 100, 200 );
 
-	echo '<select name="alfwp-setting[limit]">';
+	echo '<select name="sual-setting[limit]">';
 	foreach ( $values as $val ) {
 		printf( '<option value="%1$d" %2$s>%1$d</option>', $val, selected( $option_val, $val, false ) );
 	}
@@ -111,12 +111,12 @@ function alfwp_limit_callback() {
 }
 
 // 国の設定セクション
-function alfwp_country_callback() {
-	$options    = get_option( 'alfwp-setting' );
+function sual_country_callback() {
+	$options    = get_option( 'sual-setting' );
 	$option_val = isset( $options['country'] ) ? $options['country'] : 'JP';
 
-	echo '<select name="alfwp-setting[country]">';
-	foreach ( ALFWP_COUNTRY_VALUES as $item ) {
+	echo '<select name="sual-setting[country]">';
+	foreach ( SUAL_COUNTRY_VALUES as $item ) {
 		printf( '<option value="%s" %s>%s</option>', $item['value'], selected( $option_val, $item['value'], false ), $item['label'] );
 	}
 	echo '</select>';
@@ -124,12 +124,12 @@ function alfwp_country_callback() {
 }
 
 // 言語の設定セクション
-function alfwp_lang_callback() {
-	$options    = get_option( 'alfwp-setting' );
+function sual_lang_callback() {
+	$options    = get_option( 'sual-setting' );
 	$option_val = isset( $options['lang'] ) ? $options['lang'] : 'auto';
 
-	echo '<select name="alfwp-setting[lang]">';
-	foreach ( ALFWP_LANG_VALUES as $item ) {
+	echo '<select name="sual-setting[lang]">';
+	foreach ( SUAL_LANG_VALUES as $item ) {
 		printf( '<option value="%s" %s>%s</option>', $item['value'], selected( $option_val, $item['value'], false ), $item['label'] );
 	}
 	echo '</select>';

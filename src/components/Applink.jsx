@@ -3,40 +3,40 @@ import { StoreIcon } from './StoreIcon';
 
 const Applink = ({ app }) => {
 	return (
-		<div className={`alfwp alfwp-${app.type}`}>
+		<div className={`sual sual-${app.type}`}>
 			<a
-				className='alfwp-figure'
+				className='sual-figure'
 				href={app.url}
 				target='_blank'
 				rel='noopener nofollow noreferrer'
 			>
-				<img className='alfwp-img' src={app.iconUrl} alt={app.title} />
+				<img className='sual-img' src={app.iconUrl} alt={app.title} />
 			</a>
-			<div className='alfwp-content'>
+			<div className='sual-content'>
 				<a
-					className='alfwp-title'
+					className='sual-title'
 					href={app.url}
 					target='_blank'
 					rel='noopener nofollow noreferrer'
 				>
 					{app.title}
 				</a>
-				<div className='alfwp-artist'>{app.artist}</div>
+				<div className='sual-artist'>{app.artist}</div>
 
-				<div className='alfwp-btns'>
+				<div className='sual-btns'>
 					{app.previewUrl && (
 						<a
-							className='alfwp-audition alfwp-btn'
+							className='sual-audition sual-btn'
 							href={app.previewUrl}
 							target='_blank'
 							rel='noopener nofollow noreferrer'
 						>
 							<HiPlay />
-							<span className='alfwp-btn-label'>試聴</span>
+							<span className='sual-btn-label'>試聴</span>
 						</a>
 					)}
 					<a
-						className='alfwp-store alfwp-btn'
+						className='sual-store sual-btn'
 						href={app.url}
 						target='_blank'
 						rel='noopener nofollow noreferrer'

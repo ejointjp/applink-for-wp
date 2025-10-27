@@ -3,15 +3,15 @@
 	"apiVersion": 3,
 	"name": "su/applink",
 	"version": "0.1.0",
-	"title": "Applink",
-	"category": "alfwp-blocks",
+	"title": "SU Applink",
+	"category": "su-blocks",
 	"icon": "instagram",
 	"description": "",
 	"example": {},
 	"supports": {
 		"html": false
 	},
-	"textdomain": "applink-for-wp",
+	"textdomain": "su-applink",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
