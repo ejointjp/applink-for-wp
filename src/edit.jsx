@@ -46,7 +46,6 @@ const edit = (props) => {
 	const [result, setResult] = useState({});
 	const [term, setTerm] = useState('');
 	const [tempTerm, setTempTerm] = useState('');
-	// const [entity, setEntity] = useState('software');
 	const [state, setState] = useState('');
 	const [limit, setLimit] = useState(options.limit || 10);
 	const [lang, setLang] = useState(options.lang || 'auto');
@@ -276,7 +275,7 @@ const edit = (props) => {
 			)}
 
 			<Display />
-			{hasApp && <Applink app={app} />}
+			{hasApp && <Applink app={app} isEditor={true} />}
 			{hasResult && <ResultList />}
 		</div>
 	);
