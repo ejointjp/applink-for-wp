@@ -77,7 +77,7 @@
 .wp-applink-figure {
 	& > img {
 		width: 3rem;
-		border-radius: 0.25rem;
+		border-radius: 0.7rem;
 	}
 }
 
