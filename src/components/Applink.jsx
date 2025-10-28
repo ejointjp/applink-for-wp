@@ -49,7 +49,7 @@ const Applink = ({ app, isEditor = false }) => {
 						</LinkWrapper>
 					)}
 					<LinkWrapper
-						className='sual-store sual-btn'
+						className='sual-storesual-btn'
 						href={app.url}
 						target='_blank'
 						rel='noopener nofollow noreferrer'
