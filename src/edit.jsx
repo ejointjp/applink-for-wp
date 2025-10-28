@@ -108,29 +108,41 @@ const edit = (props) => {
 
 	// 取得したデータの種類によって表示する内容を選別する
 	const itemAtts = (item) => {
+		// entity=movieでの検索時、映画はkind: "feature-movie"
+		if (item.kind === 'feature-movie') {
+			return movieAtts(item);
+		}
+
+		// その他の種類
 		if (item.kind === 'software') return appAtts(item);
 		else if (item.kind === 'mac-software') return macAppAtts(item);
-		else if (item.kind === 'feature-movie') return movieAtts(item);
 		else if (item.kind === 'ebook') return ebookAtts(item);
 		else if (item.kind === 'podcast') return podcastAtts(item);
 		else if (item.kind === 'song') return musicTrackAtts(item);
 		else if (item.kind === 'music-video') return musicVideoAtts(item);
+		else if (item.kind === 'interactive-booklet')
+			return ebookAtts(item); // ブックタイプの追加
+		else if (item.kind === 'book')
+			return ebookAtts(item); // 書籍
 		else if (item.wrapperType === 'audiobook') return audiobookAtts(item);
 		else if (
 			item.wrapperType === 'collection' &&
 			item.collectionType === 'Album'
 		)
 			return musicAlbumAtts(item);
-		else return appAtts(item);
+
+		return appAtts(item);
 	};
 
 	const ResultList = () => {
+		if (!result.results) return null;
+
 		const list = result.results.map((item, i) => {
 			const app = itemAtts(item);
 
 			return (
 				<div
-					className={`sual-editor-item sual-editor-${item.kind}`}
+					className={`sual-editor-item sual-editor-${item.kind || item.wrapperType || 'default'}`}
 					key={i}
 					onClick={() => {
 						setAttributes({ app: app });
@@ -220,6 +232,8 @@ const edit = (props) => {
 							value={limit}
 							onChange={(value) => setLimit(value)}
 							options={limitValues}
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
 						/>
 
 						<SelectControl
@@ -227,6 +241,8 @@ const edit = (props) => {
 							value={country}
 							onChange={(value) => setCountry(value)}
 							options={countryValues}
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
 						/>
 
 						<SelectControl
@@ -234,6 +250,8 @@ const edit = (props) => {
 							value={lang}
 							onChange={(value) => setLang(value)}
 							options={langValues}
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
 						/>
 
 						<p>
@@ -261,6 +279,8 @@ const edit = (props) => {
 							setTermIfChanged();
 						}}
 						options={entityOptions}
+						__next40pxDefaultSize
+						__nextHasNoMarginBottom
 					/>
 
 					<PlainText
